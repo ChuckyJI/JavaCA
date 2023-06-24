@@ -7,6 +7,7 @@ import com.example.javaca.pojo.Enrollment;
 import com.example.javaca.pojo.Grade;
 import com.example.javaca.pojo.Student;
 import jakarta.annotation.Resource;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.example.javaca.repository.*;
 
@@ -17,9 +18,11 @@ public class lecturerServiceImpl implements lecturerService{
     @Resource
     private AdminLecturerRepository adminLecturerRepository;
     private lecturerRepository lecturerRepository;
+    private lecturerCourseRepository lecturerCourseRepository;
 
-    public lecturerServiceImpl(com.example.javaca.repository.lecturerRepository lecturerRepository) {
+    public lecturerServiceImpl(com.example.javaca.repository.lecturerRepository lecturerRepository,lecturerCourseRepository lecturerCourseRepository) {
         this.lecturerRepository = lecturerRepository;
+        this.lecturerCourseRepository =lecturerCourseRepository;
     }
 
     @Override
@@ -123,5 +126,11 @@ public class lecturerServiceImpl implements lecturerService{
     @Override
     public Boolean returnButtonStypeByCourseIdStudentId(Long courseid, Long studentid) {
         return lecturerRepository.returnButtonStypeByCourseIdStudentId(courseid,studentid);
+    }
+
+    @Override
+    @Transactional
+    public void deleteLecturerbyStudentId(Long studentId) {
+        int a = lecturerCourseRepository.deleteLecturerbyStudentId(studentId);
     }
 }

@@ -30,4 +30,5 @@ public interface lecturerService {
 
     Student updateLecturer(Student lecturer);
     Boolean returnButtonStypeByCourseIdStudentId(Long courseid,Long studentid);
+    void deleteLecturerbyStudentId(@Param("studentId") Long studentId);
 }

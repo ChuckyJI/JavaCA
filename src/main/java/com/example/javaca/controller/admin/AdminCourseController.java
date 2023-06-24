@@ -5,6 +5,7 @@ import com.example.javaca.dto.CourseDTO;
 import com.example.javaca.dto.LecturerCourseDTO;
 import com.example.javaca.pojo.Course;
 import com.example.javaca.pojo.Grade;
+import com.example.javaca.pojo.LecturerCourseEntity;
 import com.example.javaca.pojo.Student;
 import com.example.javaca.repository.courseRepository;
 import com.example.javaca.repository.studentRepository;
@@ -36,12 +37,8 @@ public class AdminCourseController {
 
     @DeleteMapping("/{id}")
     public void deleteModule(@PathVariable("id") Long id){
-//        courseService.deleteCourse(id);
-//        Course course = courseService.findCoursebyId(id);
-//        for(Student student: course.getStudentList()){
-//            course.getStudentList().remove(student);
-//            student.getCourseList().remove(course);
-//        }
+        courseService.deleteCourse(id);
+        courseService.deleteLecturerbyCourseId(id);
         courseRepository.deleteById(id);
     }
 

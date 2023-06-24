@@ -4,6 +4,7 @@ package com.example.javaca.service.Impl;
 import com.example.javaca.dto.CourseDTO;
 import com.example.javaca.pojo.Course;
 import com.example.javaca.pojo.Grade;
+import com.example.javaca.pojo.LecturerCourseEntity;
 import org.springframework.data.repository.query.Param;
 
 import java.util.LinkedHashMap;
@@ -26,4 +27,5 @@ public interface courseService {
     void deleteGradebyCourseId(Long courseId);
     void deleteEnrollmentbyCourseId(Long courseId);
     Course findCoursebyId(Long id);
+    void deleteLecturerbyCourseId(Long courseId);
 }

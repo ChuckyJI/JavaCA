@@ -5,6 +5,7 @@ import com.example.javaca.dto.LecturerDTO;
 import com.example.javaca.pojo.Student;
 import com.example.javaca.service.Impl.adminService;
 import com.example.javaca.service.Impl.lecturerService;
+import com.example.javaca.service.Impl.studentService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class AdminLecturerController {
     private lecturerService lecturerService;
     @Resource
     private adminService adminService;
+    private studentService studentService;
 
     @PostMapping("")
     public Student addStudent(@RequestBody Student student){
@@ -33,6 +35,7 @@ public class AdminLecturerController {
 
     @DeleteMapping("/{id}")
     public void deleteLecturer(@PathVariable("id") Long id){
+        lecturerService.deleteLecturerbyStudentId(id);
         lecturerService.deleteLecturer(id);
     }
 

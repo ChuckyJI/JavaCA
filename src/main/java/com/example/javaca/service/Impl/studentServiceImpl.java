@@ -3,7 +3,9 @@ package com.example.javaca.service.Impl;
 
 import com.example.javaca.dto.StudentDTO;
 import com.example.javaca.pojo.Student;
+import com.example.javaca.repository.lecturerCourseRepository;
 import com.example.javaca.repository.studentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 @Service
 public class studentServiceImpl implements studentService{
     private studentRepository studentRepository;
+
+
 
     public studentServiceImpl(com.example.javaca.repository.studentRepository studentRepository) {
         this.studentRepository = studentRepository;
@@ -56,4 +60,18 @@ public class studentServiceImpl implements studentService{
     public Student updateStudent(Student student) {
         return studentRepository.save(student);
     }
+
+    @Override
+    @Transactional
+    public void deleteGradebyStudentId(Long studentid) {
+        int a = studentRepository.deleteGradebyStudentId(studentid);
+    }
+
+    @Override
+    @Transactional
+    public void deleteEnrollmentbyStudentId(Long studentid) {
+        int a = studentRepository.deleteEnrollmentbyStudentId(studentid);
+    }
+
+
 }

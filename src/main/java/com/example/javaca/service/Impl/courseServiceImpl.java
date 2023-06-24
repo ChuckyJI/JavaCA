@@ -5,6 +5,7 @@ import com.example.javaca.dto.CourseDTO;
 import com.example.javaca.pojo.Collage;
 import com.example.javaca.pojo.Course;
 import com.example.javaca.pojo.Grade;
+import com.example.javaca.pojo.LecturerCourseEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.example.javaca.repository.*;
@@ -15,9 +16,12 @@ import java.util.*;
 @Service
 public class courseServiceImpl implements courseService{
     private courseRepository courseRepository;
+    private lecturerCourseRepository lecturerCourseRepository;
 
-    public courseServiceImpl(courseRepository courseRepository) {
+    public courseServiceImpl(courseRepository courseRepository,lecturerCourseRepository lecturerCourseRepository) {
+
         this.courseRepository = courseRepository;
+        this.lecturerCourseRepository=lecturerCourseRepository;
     }
 
     @Override
@@ -143,6 +147,13 @@ public class courseServiceImpl implements courseService{
     @Override
     public Course findCoursebyId(Long id) {
         return courseRepository.findCoursebyId(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteLecturerbyCourseId(Long courseId) {
+        int a = lecturerCourseRepository.deleteLecturerbyCourseId(courseId);
+        a++;
     }
 
 }

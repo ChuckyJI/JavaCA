@@ -4,6 +4,7 @@ package com.example.javaca.controller.admin;
 import com.example.javaca.dto.StudentDTO;
 import com.example.javaca.pojo.Student;
 import com.example.javaca.service.Impl.adminService;
+import com.example.javaca.service.Impl.courseService;
 import com.example.javaca.service.Impl.studentService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +36,8 @@ public class AdminStudentController {
 
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable("id") Long id){
+        studentService.deleteEnrollmentbyStudentId(id);
+        studentService.deleteGradebyStudentId(id);
         studentService.deleteStudent(id);
     }
 
