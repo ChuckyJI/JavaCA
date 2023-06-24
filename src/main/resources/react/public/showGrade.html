@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <style>
+    .rowset{
+      height:100%;
+    }
+    .rowset div:hover{
+      background-color: #e0e0e0;
+    }
+    .rowall{
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+<div class="text-end align-middle" style="background-color: #f8f8f8">
+  <span style="font-size: 18px;color:black;font-weight: bold">Welcome back!</span>
+  <span style="font-size: 18px;color:blue;font-weight: bold;margin-right: 30px" th:text="${studentLogin.name}+'('+${studentLogin.studentId}+')'"></span>
+  <a class="btn btn-sm btn-danger" th:href="@{/logout}" style="margin-right: 15px">Logout</a>
+</div>
+<div class="row rowall">
+  <div class="rowset text-center" style="background-color: #f8f8f8; width: 6%;padding: 0px">
+    <img src="/logo.png" width="50%" style="margin-left:10px;margin-bottom: 10px">
+    <div>
+      <a href="/student/finalGrade" style="text-decoration: none">
+        <img src="/grade.png" width="25%" style="margin-top: 20px;margin-left: 10px">
+        <div style="margin-left: 10px;color: #18447e;font-weight: lighter"><span>Grade</span></div>
+      </a>
+    </div>
+    <div>
+      <a href="/student/viewCourse" style="text-decoration: none">
+        <img src="/course.png" width="25%" style="margin-top: 20px;margin-left: 10px">
+        <div style="margin-left: 10px;color: #18447e;font-weight: lighter"><span>Course</span></div>
+      </a>
+    </div>
+    <div>
+      <a href="/student/enrollCourse" style="text-decoration: none">
+        <img src="/enrollment.png" width="25%" style="margin-top: 20px;margin-left: 10px">
+        <div style="margin-left: 10px;color: #18447e;font-weight: lighter"><span>Enrollment</span></div>
+      </a>
+    </div>
+  </div>
+  <div style="width: 94%" class="text-center">
+      <div class="row text-start">
+        <span style="color:black;font-size: 24px;line-height: 2cm;font-weight: bold">My Grade</span>
+      </div>
+      <table class="table align-middle">
+        <thead>
+        <tr>
+          <th scope="col">Course ID</th>
+          <th scope="col">Course Name</th>
+          <th scope="col">Course Credit</th>
+          <th scope="col">Course Mark</th>
+          <th scope="col">Course Level</th>
+          <th scope="col">Course GPA</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr th:each="gradeMap:${grade}">
+            <td th:text="${gradeMap.key.courseId}"></td>
+            <td th:text="${gradeMap.key.cousename}"></td>
+            <td th:text="${gradeMap.key.credit}"></td>
+            <td>
+              <span th:if="${gradeMap.value>= 100}" th:text="${#numbers.formatDecimal(gradeMap.value/10,0,1)}"></span>
+              <span th:unless="${gradeMap.value>= 100}" th:text="${#numbers.formatDecimal(gradeMap.value,0,1)}"></span>
+            </td>
+            <td>
+              <span th:if="${gradeMap.value}> 100"> D+ </span>
+              <span th:if="${gradeMap.value}>=85 and ${gradeMap.value}<=100">A+ </span>
+              <span th:if="${gradeMap.value}>=80 and ${gradeMap.value}<85">A </span>
+              <span th:if="${gradeMap.value}>=75 and ${gradeMap.value}<80">A- </span>
+              <span th:if="${gradeMap.value}>=70 and ${gradeMap.value}<75">B+ </span>
+              <span th:if="${gradeMap.value}>=65 and ${gradeMap.value}<70">B </span>
+              <span th:if="${gradeMap.value}>=60 and ${gradeMap.value}<65">B- </span>
+              <span th:if="${gradeMap.value}>=55 and ${gradeMap.value}<60">C+ </span>
+              <span th:if="${gradeMap.value}>=50 and ${gradeMap.value}<55">C </span>
+              <span th:if="${gradeMap.value}>=45 and ${gradeMap.value}<50">D+ </span>
+              <span th:if="${gradeMap.value}>=40 and ${gradeMap.value}<45">D </span>
+              <span th:if="${gradeMap.value}<40">F </span>
+            </td>
+            <td>
+              <span th:if="${gradeMap.value}> 100"> 1.5 </span>
+              <span th:if="${gradeMap.value}>=85 and ${gradeMap.value}<=100">5.0 </span>
+              <span th:if="${gradeMap.value}>=80 and ${gradeMap.value}<85">5.0 </span>
+              <span th:if="${gradeMap.value}>=75 and ${gradeMap.value}<80">4.5 </span>
+              <span th:if="${gradeMap.value}>=70 and ${gradeMap.value}<75">4.0 </span>
+              <span th:if="${gradeMap.value}>=65 and ${gradeMap.value}<70">3.5 </span>
+              <span th:if="${gradeMap.value}>=60 and ${gradeMap.value}<65">3.0 </span>
+              <span th:if="${gradeMap.value}>=55 and ${gradeMap.value}<60">2.5 </span>
+              <span th:if="${gradeMap.value}>=50 and ${gradeMap.value}<55">2.0 </span>
+              <span th:if="${gradeMap.value}>=45 and ${gradeMap.value}<50">1.5 </span>
+              <span th:if="${gradeMap.value}>=40 and ${gradeMap.value}<45">1.0 </span>
+              <span th:if="${gradeMap.value}<40">0.0 </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div class="row text-end">
+        <hr class="my-4">
+        <span th:text="'Average GPA: '+${#numbers.formatDecimal(avgGPA,0,2)}" style="font-size:22px;font-weight: bold"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+.main-color {
+  background-color: #36454f;
+}
+
+.parent-container{
+  position:relative;
+}
+
+.navbar-full-width {
+  width: 100%;
+}
+
+.sidebar-btn {
+  width: 100%;
+  height: 40px;
+}
+
+.rowset {
+  height: 100%;
+}
+.rowset div:hover {
+  background-color: #e0e0e0;
+}
+.rowall {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.content-wrapper {
+  position: absolute; /* or position: absolute; */
+  top: 0;
+  left: 10%; /* Adjust the left value according to your desired position */
+  width: 90%; /* Adjust the width value to fit the remaining space */
+}

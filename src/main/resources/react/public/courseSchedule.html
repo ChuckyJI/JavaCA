@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <style>
+    .rowset{
+      height:100%;
+    }
+    .rowset div:hover{
+      background-color: #e0e0e0;
+    }
+    .rowall{
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+<div class="text-end align-middle" style="background-color: #f8f8f8">
+  <span style="font-size: 18px;color:black;font-weight: bold">Welcome back!</span>
+  <span style="font-size: 18px;color:blue;font-weight: bold;margin-right: 30px" th:text="${studentLogin.name}+'('+${studentLogin.studentId}+')'"></span>
+  <a class="btn btn-sm btn-danger" th:href="@{/logout}" style="margin-right: 15px">Logout</a>
+</div>
+<div class="row rowall">
+  <div class="rowset text-center" style="background-color: #f8f8f8; width: 6%;padding: 0px">
+    <img src="/logo.png" width="50%" style="margin-left:10px;margin-bottom: 10px">
+    <div>
+      <a href="/student/finalGrade" style="text-decoration: none">
+        <img src="/grade.png" width="25%" style="margin-top: 20px;margin-left: 10px">
+        <div style="margin-left: 10px;color: #18447e;font-weight: lighter"><span>Grade</span></div>
+      </a>
+    </div>
+    <div>
+      <a href="/student/viewCourse" style="text-decoration: none">
+        <img src="/course.png" width="25%" style="margin-top: 20px;margin-left: 10px">
+        <div style="margin-left: 10px;color: #18447e;font-weight: lighter"><span>Course</span></div>
+      </a>
+    </div>
+    <div>
+      <a href="/student/enrollCourse" style="text-decoration: none">
+        <img src="/enrollment.png" width="25%" style="margin-top: 20px;margin-left: 10px">
+        <div style="margin-left: 10px;color: #18447e;font-weight: lighter"><span>Enrollment</span></div>
+      </a>
+    </div>
+  </div>
+  <div style="width: 94%" class="text-center">
+
+
+      <div class="row text-start">
+        <span style="color:black;font-size: 24px;line-height: 2cm;font-weight: bold">Course Schedule</span>
+      </div>
+      <div class="row">
+        <div class="col-8 text-start">
+          <a href="/student/viewCourse" class="btn btn-primary">Course Details</a><br>
+        </div>
+        <div class="col-4 text-end">
+          <a th:href="@{/student/getSchedulepdf}" class="btn btn-dark">Download</a>
+        </div>
+      </div>
+
+
+      <table class="table align-middle" style="table-layout: fixed">
+        <thead>
+          <tr>
+            <th scope="col">*</th>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td> 8:00 ~ 9:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '18'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '28'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '38'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '48'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '58'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 9:00 ~ 10:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '19'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '29'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '39'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '49'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '59'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 10:00 ~ 11:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '110'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '210'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '310'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '410'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '510'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 11:00 ~ 12:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '111'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '211'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '311'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '411'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '511'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 12:00 ~ 13:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '112'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '212'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '312'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '412'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '512'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 13:00 ~ 14:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '113'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '213'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '313'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '413'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '513'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 14:00 ~ 15:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '114'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '214'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '314'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '414'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '514'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 15:00 ~ 16:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '115'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '215'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '315'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '415'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '515'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 16:00 ~ 17:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '116'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '216'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '316'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '416'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '516'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 17:00 ~ 18:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '117'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '217'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '317'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '417'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '517'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 18:00 ~ 19:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '118'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '218'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '318'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '418'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '518'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+          <tr>
+            <td> 19:00 ~ 20:00</td>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '119'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '219'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '319'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '419'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+            <span th:each="freeCourse:${freeCourse}" th:if="${freeCourse.key eq '519'}">
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '1'}">
+                <td class="table-primary" th:text="${freeCourseDetail.key}"></td>
+              </span>
+              <span th:each="freeCourseDetail:${freeCourse.value}" th:if="${freeCourseDetail.value eq '0'}">
+                <td></td>
+              </span>
+            </span>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
