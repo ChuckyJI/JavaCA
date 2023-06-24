@@ -49,11 +49,11 @@
   </div>
   <div style="width: 94%" class="text-center">
       <div class="row text-start">
-        <span style="color:black;font-size: 24px;line-height: 2cm;font-weight: bold">View Course</span>
+        <span style="color:black;font-size: 24px;line-height: 2cm;font-weight: bold">View Course Enrollment</span>
       </div>
       <div th:each="courseStudent:${courseStudent}">
         <h5 class="text-start align-middle" style="color: cornflowerblue" th:text="${courseStudent.key.courseId}+':'+${courseStudent.key.cousename}"></h5>
-        <table class="table w-100 align-middle">
+        <table class="table w-100 align-middle" style="table-layout: fixed">
           <thead>
           <tr>
             <th scope="col">Student Name</th>
@@ -64,17 +64,22 @@
           </thead>
           <tbody>
             <span th:each="courseStudentDetails:${courseStudent.value}">
-              <tr>
-                <td th:text="${courseStudentDetails.name}"></td>
-                <td th:text="${courseStudentDetails.collage.name}"></td>
-                <td th:text="${courseStudentDetails.email}"></td>
+                <tr>
+                <td th:text="${courseStudentDetails.key.name}"></td>
+                <td th:text="${courseStudentDetails.key.collage.name}"></td>
+                <td th:text="${courseStudentDetails.key.email}"></td>
                 <td>
-                  <a th:href="@{/lecturer/viewStudentlec/{studentname}/{coursename}(studentname=${courseStudentDetails.name},coursename=${courseStudent.key.cousename})}" class="btn btn-danger" onclick="fun()">Reject</a>
+                  <span th:if="${courseStudentDetails.value==false}">
+                    <a th:href="@{/lecturer/viewStudentlec/{studentname}/{coursename}(studentname=${courseStudentDetails.key.name},coursename=${courseStudent.key.cousename})}" class="btn btn-danger" onclick="fun()">Reject</a>
                   <script>
-                function fun() {
-                  alert('Rejected successfully! Will send requirement to administrator.')
-                }
-              </script>
+                    function fun() {
+                      alert('Your request has been sent to administrator for review.')
+                    }
+                  </script>
+                  </span>
+                  <span th:unless="${courseStudentDetails.value==false}">
+                    <a class="btn btn-secondary disabled">Reject</a>
+                  </span>
                 </td>
               </tr>
             </span>

@@ -37,7 +37,11 @@ public class AdminBlockController {
         for(String studentname : stringList) {
             Student student = adminService.getCoursebyStudentId(studentname);
             Course course = adminService.getCoursebyCourseId(lecturerCourseDTO.getCourseId());
-            enrollmentService.sendEmail("javacamailsender@gmail.com", student.getEmail(), "NUS CAPS Notice [UnEnroll]", "Sorry to tell you. Your course " + course.getCousename() + " is blocked.You can enroll another course.");
+            enrollmentService.sendEmail("javacamailsender@gmail.com", student.getEmail(), "NUS CAPS Notice [UnEnroll]", "Dear Student, \u200B\n" +
+                    "\n" +
+                    "Your enrollment to the course " + "\"" + course.getCousename() + "\"" + " has been rejected. \u200B\n" +
+                    "\n" +
+                    "Please try other courses.");
         }
     }
 }

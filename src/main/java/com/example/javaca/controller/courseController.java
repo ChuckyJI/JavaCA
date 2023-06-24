@@ -87,7 +87,9 @@ public class courseController {
         List<List<String>> result = new ArrayList<>();
         result.add(rowtitle);
 
-        LinkedHashMap<String, LinkedHashMap<String,String>> hashMapLinkedHashMap = courseService.isFreeCourse("S1000001K");
+        Student student = (Student) session.getAttribute("sessionid");
+
+        LinkedHashMap<String, LinkedHashMap<String,String>> hashMapLinkedHashMap = courseService.isFreeCourse(student.getStudentId());
         for(int i = 8;i<20;i++){
             String mondayString = "";
             String tuesdayString = "";

@@ -137,7 +137,7 @@ public class enrollmentController {
             enrollNewCourse.setIsEnroll(true);
             enrollmentService.updateEnrollment(enrollNewCourse);
         }
-        enrollmentService.sendEmail("javacamailsender@gmail.com", student.getEmail(),"NUS CAPS Notice [Enroll]", "Enroll Successfully!"+" You have enrolled the "+course.getCousename());
+        enrollmentService.sendEmail("javacamailsender@gmail.com", student.getEmail(),"NUS CAPS Notice [Enroll]", "Enroll Successfully!"+" You have enrolled the "+"\""+course.getCousename()+"\""+" module" );
         model.addAttribute("studentLogin",student);
         return "redirect:/student/enrollCourse";
     }

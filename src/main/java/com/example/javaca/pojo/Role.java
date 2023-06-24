@@ -22,5 +22,4 @@ public class Role {
     private String name;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "role")
     private List<Student> student;
-
 }

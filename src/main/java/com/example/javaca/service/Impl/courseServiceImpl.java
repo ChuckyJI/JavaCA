@@ -4,6 +4,7 @@ package com.example.javaca.service.Impl;
 import com.example.javaca.dto.CourseDTO;
 import com.example.javaca.pojo.Collage;
 import com.example.javaca.pojo.Course;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.example.javaca.repository.*;
 
@@ -112,8 +113,10 @@ public class courseServiceImpl implements courseService{
     }
 
     @Override
+    @Transactional
     public void deleteCourse(Long id) {
-        courseRepository.deleteById(id);
+        int a =courseRepository.deleteGradebyCourseId(id);
+        int b =courseRepository.deleteEnrollmentbyCourseId(id);
     }
 
     @Override
@@ -125,5 +128,20 @@ public class courseServiceImpl implements courseService{
     public Optional<Course> findCourseById(Long id) {
         Optional<Course> course = courseRepository.findById(id);
         return course;
+    }
+
+    @Override
+    public void deleteGradebyCourseId(Long courseId) {
+
+    }
+
+    @Override
+    public void deleteEnrollmentbyCourseId(Long courseId) {
+
+    }
+
+    @Override
+    public Course findCoursebyId(Long id) {
+        return courseRepository.findCoursebyId(id);
     }
 }

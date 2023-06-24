@@ -69,13 +69,18 @@ public class lecturerServiceImpl implements lecturerService{
     }
 
     @Override
-    public LinkedHashMap<Course,List<Student>> listAllStudentByCourseByLecturerForStudent(String lecturerid) {
+    public LinkedHashMap<Course,LinkedHashMap<Student,Boolean>> listAllStudentByCourseByLecturerForStudent(String lecturerid) {
         List<Course> wholeCourseList = lecturerRepository.listAllCourseByLecturer(lecturerid);
-        LinkedHashMap<Course,List<Student>> courseListMap = new LinkedHashMap<>();
+        LinkedHashMap<Course,LinkedHashMap<Student,Boolean>> courseListMap = new LinkedHashMap<>();
 
         for(Course data : wholeCourseList){
             Course course = data;
-            courseListMap.put(course,lecturerRepository.listAllStudentByCourseByLecturerForStudent(course.getCousename()));
+            courseListMap.put(course,new LinkedHashMap<>());
+            List<Student> studentList =lecturerRepository.listAllStudentByCourseByLecturerForStudent(course.getCousename());
+            for(Student student:studentList){
+                Boolean button = returnButtonStypeByCourseIdStudentId(data.getId(), student.getID());
+                courseListMap.get(course).put(student,button);
+            }
         }
         return courseListMap;
     }
@@ -113,5 +118,10 @@ public class lecturerServiceImpl implements lecturerService{
     @Override
     public Student updateLecturer(Student lecturer) {
         return adminLecturerRepository.save(lecturer);
+    }
+
+    @Override
+    public Boolean returnButtonStypeByCourseIdStudentId(Long courseid, Long studentid) {
+        return lecturerRepository.returnButtonStypeByCourseIdStudentId(courseid,studentid);
     }
 }

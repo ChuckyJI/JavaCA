@@ -45,20 +45,4 @@ public class Course {
     private List<Grade> gradeList;
     @OneToMany(mappedBy = "course")
     private List<Enrollment> enrollmentList;
-
-    public Course(String courseId, String cousename, Integer credit, Integer size, String room, Boolean compulsory, Collage collage, LocalTime startingtime, LocalTime endingtime, String date, List<Student> studentList, List<Grade> gradeList, List<Enrollment> enrollmentList) {
-        this.courseId = courseId;
-        this.cousename = cousename;
-        this.credit = credit;
-        this.size = size;
-        this.room = room;
-        this.compulsory = compulsory;
-        this.collage = collage;
-        this.startingtime = startingtime;
-        this.endingtime = endingtime;
-        this.date = date;
-        this.studentList = studentList;
-        this.gradeList = gradeList;
-        this.enrollmentList = enrollmentList;
-    }
 }

@@ -32,4 +32,7 @@ public interface lecturerRepository extends JpaRepository<Grade,Long> {
 
     @Query("SELECT s.ID,s.Password,s.Name,s.Email,s.studentId ,s.collage.name,s.collage.id FROM Student s where s.role.id=2")
     List<Object[]> findAllLecturerDetails();
+
+    @Query("select e.isReject from Enrollment e where e.course.id=:courseid and e.student.ID=:studentid")
+    Boolean returnButtonStypeByCourseIdStudentId(@Param("courseid") Long courseid,@Param("studentid") Long studentid);
 }

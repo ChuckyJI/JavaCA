@@ -35,6 +35,9 @@ public class AdminCourseController {
     @DeleteMapping("/{id}")
     public void deleteModule(@PathVariable("id") Long id){
         courseService.deleteCourse(id);
+        Course course = courseService.findCoursebyId(id);
+        course.getStudentList().clear();
+        courseRepository.deleteById(id);
     }
 
     @PutMapping("")

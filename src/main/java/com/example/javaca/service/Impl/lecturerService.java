@@ -20,7 +20,7 @@ public interface lecturerService {
     Grade courseMarkEntityByStudent(String studentname,String coursename);
     List<Grade> getAllGrade();
     Enrollment updateEnrollmentResult(String studentname, String coursename);
-    LinkedHashMap<Course,List<Student>> listAllStudentByCourseByLecturerForStudent(String lecturerid);
+    LinkedHashMap<Course,LinkedHashMap<Student,Boolean>> listAllStudentByCourseByLecturerForStudent(String lecturerid);
 
     List<LecturerDTO> getAllLecturers();
 
@@ -29,4 +29,5 @@ public interface lecturerService {
     void deleteLecturer(Long id);
 
     Student updateLecturer(Student lecturer);
+    Boolean returnButtonStypeByCourseIdStudentId(Long courseid,Long studentid);
 }

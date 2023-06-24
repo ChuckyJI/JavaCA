@@ -169,6 +169,7 @@ export const LecturerController = () => {
       );
       setStudent({});
       showNotice("Great! You have updated the list successfully!");
+      fetchStudents();
     } catch (error) {
       console.error(error);
     }
