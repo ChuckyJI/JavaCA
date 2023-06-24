@@ -70,6 +70,7 @@
       <tr>
         <th scope="col">Course ID</th>
         <th scope="col">Course Name</th>
+        <th scope="col">Course Lecturer</th>
         <th scope="col">Compulsory</th>
         <th scope="col">Course Credit</th>
         <th scope="col">Course Room</th>
@@ -83,6 +84,11 @@
       <tr th:each="course:${course}" th:if="${course.value == '00'}" class="table-info">
         <td th:text="${course.key.courseId}"></td>
         <td th:text="${course.key.cousename}"></td>
+        <td th:each="courseLecturer:${courseLecturer}" th:if="${courseLecturer.key.cousename}==${course.key.cousename}">
+            <span th:each="lecturerList:${courseLecturer.value}">
+                <div th:text="${lecturerList.name}"></div>
+            </span>
+        </td>
         <td th:text="${course.key.compulsory}"></td>
         <td th:text="${course.key.credit}"></td>
         <td th:text="${course.key.room}"></td>
@@ -102,6 +108,11 @@
       <tr th:each="course:${course}" th:if="${course.value == '01'}" class="table-danger">
         <td th:text="${course.key.courseId}"></td>
         <td th:text="${course.key.cousename}"></td>
+        <td th:each="courseLecturer:${courseLecturer}" th:if="${courseLecturer.key.cousename}==${course.key.cousename}">
+            <span th:each="lecturerList:${courseLecturer.value}">
+                <div th:text="${lecturerList.name}"></div>
+            </span>
+        </td>
         <td th:text="${course.key.compulsory}"></td>
         <td th:text="${course.key.credit}"></td>
         <td th:text="${course.key.room}"></td>
@@ -121,6 +132,11 @@
       <tr th:each="course:${course}" th:if="${course.value == '10'}" class="table-success">
         <td th:text="${course.key.courseId}"></td>
         <td th:text="${course.key.cousename}"></td>
+        <td th:each="courseLecturer:${courseLecturer}" th:if="${courseLecturer.key.cousename}==${course.key.cousename}">
+            <span th:each="lecturerList:${courseLecturer.value}">
+                <div th:text="${lecturerList.name}"></div>
+            </span>
+        </td>
         <td th:text="${course.key.compulsory}"></td>
         <td th:text="${course.key.credit}"></td>
         <td th:text="${course.key.room}"></td>
@@ -140,6 +156,11 @@
       <tr th:each="course:${course}" th:if="${course.value == '11'}" class="table-secondary">
         <td th:text="${course.key.courseId}"></td>
         <td th:text="${course.key.cousename}"></td>
+        <td th:each="courseLecturer:${courseLecturer}" th:if="${courseLecturer.key.cousename}==${course.key.cousename}">
+            <span th:each="lecturerList:${courseLecturer.value}">
+                <div th:text="${lecturerList.name}"></div>
+            </span>
+        </td>
         <td th:text="${course.key.compulsory}"></td>
         <td th:text="${course.key.credit}"></td>
         <td th:text="${course.key.room}"></td>
@@ -159,6 +180,11 @@
       <tr th:each="course:${course}" th:if="${course.value == '99'}" class="table-dark">
         <td th:text="${course.key.courseId}"></td>
         <td th:text="${course.key.cousename}"></td>
+        <td th:each="courseLecturer:${courseLecturer}" th:if="${courseLecturer.key.cousename}==${course.key.cousename}">
+            <span th:each="lecturerList:${courseLecturer.value}">
+                <div th:text="${lecturerList.name}"></div>
+            </span>
+        </td>
         <td th:text="${course.key.compulsory}"></td>
         <td th:text="${course.key.credit}"></td>
         <td th:text="${course.key.room}"></td>

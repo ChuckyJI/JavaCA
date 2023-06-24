@@ -136,6 +136,25 @@ public class enrollmentServiceImpl implements enrollmentService{
     }
 
     @Override
+    public LinkedHashMap<Course, List<Student>> getLecturerByCourseKY(String string) {
+        List<Object[]> studentCoursePair = enrollmentRepository.getLecturerByCourseKY(string);
+        LinkedHashMap<Course, List<Student>> studentCourseMap = new LinkedHashMap<>();
+
+        for(Object[] data:studentCoursePair){
+            Course course = (Course) data[0];
+            Student student = (Student) data[1];
+            if(!studentCourseMap.containsKey(course)){
+                studentCourseMap.put(course,new ArrayList<>(Arrays.asList(student)));
+            }
+            else{
+                studentCourseMap.get(course).add(student);
+                studentCourseMap.put(course,studentCourseMap.get(course));
+            }
+        }
+        return studentCourseMap;
+    }
+
+    @Override
     public Enrollment updateEnrollment(Enrollment enrollment) {
         return enrollmentRepository.save(enrollment);
     }

@@ -1,4 +1,3 @@
-import { Footer } from "../NavbarAndFooter/Footer";
 import { Navbar } from "../NavbarAndFooter/Navbar";
 import { AdminSidebar } from "./AdminComponents/AdminSidebar";
 import { React, useState } from "react";
@@ -7,15 +6,27 @@ import { StudentController } from "./AdminComponents/SidebarComponents/StudentCo
 import { LecturerController } from "./AdminComponents/SidebarComponents/LecturerController";
 import { BlockManage } from "./AdminComponents/SidebarComponents/BlockManage";
 import CourseController from "./AdminComponents/SidebarComponents/CourseController";
+import { useEffect } from "react";
 
 export const AdminPage = () => {
-  const [contextStatus, setContextStatus] = useState(1);
+  const [contextStatus, setContextStatus] = useState(0);
 
   const handleChangeStatus = (newStatus) => {
     setContextStatus(newStatus);
+    localStorage.setItem("contextStatus", newStatus);
   };
 
   let componentToRender = null;
+  useEffect(() => {
+    const storedStatus = localStorage.getItem("contextStatus");
+    if (storedStatus) {
+      setContextStatus(parseInt(storedStatus, 10));
+    }
+  }, []);
+
+  useEffect(() => {
+    document.title = "(SA56-T2) Admin Page";
+  }, []);
 
   if (contextStatus === 1) {
     componentToRender = <CourseController />;
@@ -38,11 +49,11 @@ export const AdminPage = () => {
             <div className="col-1">
               <AdminSidebar onChangeStatus={handleChangeStatus} />
             </div>
-            <div className="content-wrapper pt-5 col-9">{componentToRender}</div>
+            <div className="content-wrapper pt-5 col-9">
+              {componentToRender}
+            </div>
           </div>
         </div>
-
-
       </div>
     </Router>
   );

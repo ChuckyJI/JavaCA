@@ -4,15 +4,17 @@ package com.example.javaca.controller.admin;
 import com.example.javaca.dto.CourseDTO;
 import com.example.javaca.dto.LecturerCourseDTO;
 import com.example.javaca.pojo.Course;
+import com.example.javaca.pojo.Grade;
 import com.example.javaca.pojo.Student;
 import com.example.javaca.repository.courseRepository;
 import com.example.javaca.repository.studentRepository;
 import com.example.javaca.service.Impl.adminService;
 import com.example.javaca.service.Impl.courseService;
 import jakarta.annotation.Resource;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -34,9 +36,12 @@ public class AdminCourseController {
 
     @DeleteMapping("/{id}")
     public void deleteModule(@PathVariable("id") Long id){
-        courseService.deleteCourse(id);
-        Course course = courseService.findCoursebyId(id);
-        course.getStudentList().clear();
+//        courseService.deleteCourse(id);
+//        Course course = courseService.findCoursebyId(id);
+//        for(Student student: course.getStudentList()){
+//            course.getStudentList().remove(student);
+//            student.getCourseList().remove(course);
+//        }
         courseRepository.deleteById(id);
     }
 

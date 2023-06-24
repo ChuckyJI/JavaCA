@@ -11,10 +11,18 @@ const initialFormState = {
 
 export const BlockManage = () => {
   const [students, setStudents] = useState([]);
+  const [showMessage, setShowMessage] = useState("");
 
   useEffect(() => {
     fetchRejectedStudents();
   }, []);
+
+  const showNotice = (msg) => {
+    setShowMessage(msg);
+    setTimeout(() => {
+      setShowMessage("");
+    }, 3000);
+  };
 
   const fetchRejectedStudents = async () => {
     try {
@@ -25,6 +33,16 @@ export const BlockManage = () => {
     }
   };
 
+  function rejectConfirmation(id) {
+    const result = window.confirm(
+      "Are you sure you want to reject the request from the lecturer?"
+    );
+    if (result) {
+      handleReject(id);
+    }
+    showNotice("You have rejected the request from the lecturer.");
+  }
+
   const handleReject = async (id) => {
     try {
       await axios.put(`/admin/block/${id}`);
@@ -33,6 +51,16 @@ export const BlockManage = () => {
       console.error(error);
     }
   };
+
+  function confirmConfirmation(id, studentName) {
+    const result = window.confirm(
+      "Are you sure you want to confirm the request from the lecturer?"
+    );
+    if (result) {
+      handleConfirm(id, studentName);
+    }
+    showNotice("You have confirmed the request from the lecturer.");
+  }
 
   const handleConfirm = async (id, studentName) => {
     try {
@@ -48,41 +76,44 @@ export const BlockManage = () => {
   };
 
   return (
-      <div>
-        <h1>Blocked Students</h1>
-        <table className="table">
-          <thead>
+    <div>
+      <h1>Blocked Students</h1>
+
+      {showMessage && <p>{showMessage}</p>}
+
+      <table className="table">
+        <thead>
           <tr>
             <th>Student Name</th>
             <th>Course Name</th>
             <th>Action</th>
           </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
           {students.map((student) => (
-              <tr key={student.id}>
-                <td>{student.studentName}</td>
-                <td>{student.courseName}</td>
-                <td>
-                  <button
-                      onClick={() =>
-                          handleConfirm(student.id, [student.studentName])
-                      }
-                      className="btn btn-outline-primary"
-                  >
-                    confirm
-                  </button>
-                  <button
-                      onClick={() => handleReject(student.enrollmentId)}
-                      className="btn btn-outline-danger"
-                  >
-                    Reject
-                  </button>
-                </td>
-              </tr>
+            <tr key={student.id}>
+              <td>{student.studentName}</td>
+              <td>{student.courseName}</td>
+              <td>
+                <button
+                  onClick={() =>
+                    confirmConfirmation(student.id, [student.studentName])
+                  }
+                  className="btn btn-outline-primary"
+                >
+                  confirm
+                </button>
+                <button
+                  onClick={() => rejectConfirmation(student.enrollmentId)}
+                  className="btn btn-outline-danger"
+                >
+                  Reject
+                </button>
+              </td>
+            </tr>
           ))}
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
+    </div>
   );
 };

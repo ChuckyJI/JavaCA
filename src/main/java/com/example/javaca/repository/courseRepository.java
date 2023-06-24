@@ -2,6 +2,7 @@ package com.example.javaca.repository;
 // This is designed by SA56 Team2
 
 import com.example.javaca.pojo.Course;
+import com.example.javaca.pojo.Grade;
 import com.example.javaca.pojo.Student;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,6 +31,5 @@ public interface courseRepository extends JpaRepository<Course,Long> {
 
     @Query("select c from Course c where c.id=:id")
     Course findCoursebyId(@Param("id") Long id);
-
 
 }

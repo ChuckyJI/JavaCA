@@ -24,6 +24,7 @@ public interface enrollmentService {
     LinkedHashMap<String,Integer> conflictCourse(String studentid);
     List<Course> searchByContent(String coursename,String studentid);
     LinkedHashMap<Course,List<Student>> getLecturerByCourse(String string);
+    LinkedHashMap<Course,List<Student>> getLecturerByCourseKY(String string);
     Enrollment updateEnrollment(Enrollment enrollment);
     Page<Course> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection,String studentid);
     Page<Course> createPage(List<Course> courses, int pageNo, int pageSize, String sortField, String sortDir);

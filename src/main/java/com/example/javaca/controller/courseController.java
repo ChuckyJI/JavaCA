@@ -53,6 +53,7 @@ public class courseController {
             return "redirect:http://localhost:3000/admin";
         }
         model.addAttribute("course",courseService.findSpecificAllCourse(student.getStudentId()));
+        model.addAttribute("courseLecturer",enrollmentService.getLecturerByCourseKY(student.getStudentId()));
         model.addAttribute("studentLogin",student);
         return "course";
     }

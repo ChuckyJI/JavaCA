@@ -10,6 +10,7 @@ export const StudentController = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showMessage, setShowMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [modalTitle, setModalTitle] = useState("Add Student");
 
   useEffect(() => {
     fetchStudents();
@@ -51,12 +52,20 @@ export const StudentController = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!student.name || student.name.trim() === "") {
-      setShowMessage("Sorry, name cannot be empty!");
+    if (
+      !student.name ||
+      student.name.trim() === "" ||
+      !/^[a-zA-Z ]+$/.test(student.name)
+    ) {
+      setShowMessage("Sorry, please check your name input!");
       return;
     }
-    if (!student.email || student.email.trim() === "") {
-      setShowMessage("Sorry, please enter your email!");
+    if (
+      !student.email ||
+      student.email.trim() === "" ||
+      !student.email.endsWith(".edu")
+    ) {
+      setShowMessage("Sorry, please check your email!");
       return;
     }
 
@@ -113,7 +122,6 @@ export const StudentController = () => {
       setStudent((prevStudent) => ({
         ...prevStudent,
         [name]: value,
-        error,
       }));
     }
   };
@@ -126,6 +134,7 @@ export const StudentController = () => {
   };
 
   const addStudent = async (newStudent) => {
+    setModalTitle("Add Student");
     try {
       newStudent.role = { id: 1 };
       const response = await axios.post("/admin/student", newStudent);
@@ -165,6 +174,15 @@ export const StudentController = () => {
     }
   };
 
+  function deleteConfirmation(studentId) {
+    const result = window.confirm(
+      "Are you sure you want to delete this lecturer?"
+    );
+    if (result) {
+      deleteStudent(studentId);
+    }
+  }
+
   const deleteStudent = async (id) => {
     try {
       await axios.delete(`/admin/student/${id}`);
@@ -176,6 +194,7 @@ export const StudentController = () => {
   };
 
   const editStudent = (selectedStudent) => {
+    setModalTitle("Edit Student");
     openModal();
     setStudent(selectedStudent);
   };
@@ -188,7 +207,7 @@ export const StudentController = () => {
         className="btn btn-secondary mb-3"
         onClick={openModal}
       >
-        Add Student
+        {modalTitle}
       </button>
       {showMessage && <p>{showMessage}</p>}
 
@@ -285,7 +304,7 @@ export const StudentController = () => {
                   <button onClick={() => editStudent(student)}>Edit</button>
                 </td>
                 <td>
-                  <button onClick={() => deleteStudent(student.id)}>
+                  <button onClick={() => deleteConfirmation(student.id)}>
                     Delete
                   </button>
                 </td>

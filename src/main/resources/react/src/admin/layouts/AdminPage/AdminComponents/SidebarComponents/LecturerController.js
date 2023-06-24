@@ -10,6 +10,7 @@ export const LecturerController = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showMessage, setShowMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [modalTitle, setModalTitle] = useState("Add Lecturer");
 
   useEffect(() => {
     fetchStudents();
@@ -31,9 +32,11 @@ export const LecturerController = () => {
   const closeModal = () => {
     setStudent(initialFormState);
     setIsModalOpen(false);
+    setModalTitle("Add Lecturer");
   };
   const clearModel = () => {
     setStudent(initialFormState);
+    setModalTitle("Add Lecturer");
   };
 
   const initialFormState = {
@@ -43,7 +46,7 @@ export const LecturerController = () => {
     email: "",
     emailError: "",
     studentId: "",
-    college_name: "",
+    collage_name: "",
     password: "",
     passwordError: "",
     role: { id: "" },
@@ -53,12 +56,22 @@ export const LecturerController = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!student.name || student.name.trim() === "") {
-      setShowMessage("Sorry, name cannot be empty!");
+    console.log(student.name);
+    console.log(student.email);
+    if (
+      !student.name ||
+      student.name.trim() === "" ||
+      !/^[a-zA-Z ]+$/.test(student.name)
+    ) {
+      setShowMessage("Sorry, please check your name input!");
       return;
     }
-    if (!student.email || student.email.trim() === "") {
-      setShowMessage("Sorry, please enter your email!");
+    if (
+      !student.email ||
+      student.email.trim() === "" ||
+      !student.email.endsWith(".edu")
+    ) {
+      setShowMessage("Sorry, please check your email!");
       return;
     }
 
@@ -69,6 +82,7 @@ export const LecturerController = () => {
     }
     setStudent(initialFormState); // Reset the input fields
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let error = "";
@@ -121,7 +135,7 @@ export const LecturerController = () => {
 
   function deleteConfirmation(studentId) {
     const result = window.confirm(
-      "Are you sure you want to delete this student?"
+      "Are you sure you want to delete this lecturer?"
     );
     if (result) {
       deleteStudent(studentId);
@@ -135,6 +149,7 @@ export const LecturerController = () => {
   };
 
   const addStudent = async (newStudent) => {
+    setModalTitle("Add Lecturer");
     try {
       newStudent.role = { id: 2 };
       const response = await axios.post("/admin/lecturer", newStudent);
@@ -143,6 +158,7 @@ export const LecturerController = () => {
       showNotice(
         "Great! You have added this student to the list successfully!"
       );
+      console.log(student.id);
     } catch (error) {
       console.error(error);
     }
@@ -160,8 +176,10 @@ export const LecturerController = () => {
 
   const updateStudent = async (updatedStudent) => {
     try {
+      console.log(updatedStudent.id);
       updatedStudent.role = { id: 2 };
       const response = await axios.put("/admin/lecturer", updatedStudent);
+      console.log(response);
       setStudents(
         students.map((student) =>
           student.id === response.data.id ? response.data : student
@@ -169,7 +187,6 @@ export const LecturerController = () => {
       );
       setStudent({});
       showNotice("Great! You have updated the list successfully!");
-      fetchStudents();
     } catch (error) {
       console.error(error);
     }
@@ -186,6 +203,7 @@ export const LecturerController = () => {
   };
 
   const editStudent = (selectedStudent) => {
+    setModalTitle("Edit Lecturer");
     setStudent(selectedStudent);
     openModal();
   };
@@ -198,7 +216,7 @@ export const LecturerController = () => {
         className="btn btn-secondary mb-3"
         onClick={openModal}
       >
-        Add Lecturer
+        {modalTitle}
       </button>
       {showMessage && <p>{showMessage}</p>}
 
@@ -208,7 +226,7 @@ export const LecturerController = () => {
         contentLabel="Add Lecturer"
         className="modal-dialog modal-lg"
       >
-        <h2>Add Lecturer</h2>
+        <h2>{modalTitle}</h2>
         {showMessage && <p>{showMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group mt-2">
@@ -242,7 +260,7 @@ export const LecturerController = () => {
             <input
               type="text"
               name="collage"
-              value={student.collage?.id || ""}
+              value={student.collage?.id}
               onChange={handleInputChange}
               className="form-control"
             />
