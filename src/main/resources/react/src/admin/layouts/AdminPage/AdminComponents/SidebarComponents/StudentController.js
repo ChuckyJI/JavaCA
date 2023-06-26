@@ -159,6 +159,7 @@ export const StudentController = () => {
   };
 
   const updateStudent = async (updatedStudent) => {
+    closeModal();
     try {
       updatedStudent.role = { id: 1 };
       const response = await axios.put("/admin/student", updatedStudent);
@@ -176,7 +177,7 @@ export const StudentController = () => {
 
   function deleteConfirmation(studentId) {
     const result = window.confirm(
-      "Are you sure you want to delete this lecturer?"
+      "Are you sure you want to delete this student?"
     );
     if (result) {
       deleteStudent(studentId);
@@ -207,7 +208,7 @@ export const StudentController = () => {
         className="btn btn-secondary mb-3"
         onClick={openModal}
       >
-        {modalTitle}
+        Add Student
       </button>
       {showMessage && <p>{showMessage}</p>}
 
@@ -217,7 +218,7 @@ export const StudentController = () => {
         contentLabel="Add Student"
         className="modal-dialog modal-lg"
       >
-        <h2>Add Student</h2>
+        {student.id ? <h2>Edit Student</h2>:<h2>Add Student</h2>}
         {showMessage && <p>{showMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group mt-2">
@@ -301,10 +302,10 @@ export const StudentController = () => {
                 <td>{student.email}</td>
                 <td>{student.college_name}</td>
                 <td>
-                  <button onClick={() => editStudent(student)}>Edit</button>
+                  <button onClick={() => editStudent(student)}className="btn btn-outline-primary">Edit</button>
                 </td>
                 <td>
-                  <button onClick={() => deleteConfirmation(student.id)}>
+                  <button onClick={() => deleteConfirmation(student.id)}className="btn btn-outline-danger">
                     Delete
                   </button>
                 </td>

@@ -81,7 +81,7 @@ export const BlockManage = () => {
 
       {showMessage && <p>{showMessage}</p>}
 
-      <table className="table">
+      <table className="table mt-4">
         <thead>
           <tr>
             <th>Student Name</th>
@@ -101,8 +101,9 @@ export const BlockManage = () => {
                   }
                   className="btn btn-outline-primary"
                 >
-                  confirm
+                  Confirm
                 </button>
+
                 <button
                   onClick={() => rejectConfirmation(student.enrollmentId)}
                   className="btn btn-outline-danger"

@@ -108,7 +108,7 @@
                     </td>
                     <td>
                         <span th:each="enrollment:${enrollNumber}">
-                            <span th:each="courseMap:${enrollment}" th:if="${courseMap.key}!= ${course.size} and ${courseMap.key == course.id}">
+                            <span th:each="courseMap:${enrollment}" th:if="${courseMap.value}!= ${course.size} and ${courseMap.key == course.id}">
                                 <span th:each="enrollmentMap:${enrolledCourse}" th:if="${enrollmentMap.key}==${course.cousename}">
                                     <span th:if="${enrollmentMap.value}=='0'">
                                         <a class="btn btn-dark disabled">Enroll</a>
@@ -120,7 +120,7 @@
                                 </span>
                             </span>
 
-                            <span th:each="courseMap:${enrollment}" th:if="${courseMap.key} == ${course.size} and ${courseMap.key == course.id}">
+                            <span th:each="courseMap:${enrollment}" th:if="${courseMap.value} == ${course.size} and ${courseMap.key == course.id}">
                                 <span>
                                     <a class="btn btn-dark disabled">Enroll</a>
                                     <div style="font-size:18px;color:red">Capacity Exceeded</div>

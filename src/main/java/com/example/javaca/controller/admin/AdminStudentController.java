@@ -1,6 +1,7 @@
 package com.example.javaca.controller.admin;
 // This is designed by SA56 Team2
 
+import com.example.javaca.dto.LecturerDTO;
 import com.example.javaca.dto.StudentDTO;
 import com.example.javaca.pojo.Student;
 import com.example.javaca.service.Impl.adminService;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,7 +24,7 @@ public class AdminStudentController {
     private adminService adminService;
 
     @PostMapping("")
-    public Student addStudent(@RequestBody Student student, HttpSession session){
+    public Student addStudent(@RequestBody Student student){
         int rolenumber = adminService.calculateTotalNumber(student.getRole().getId(),student.getCollage().getId());
         Long collegenumber = student.getCollage().getId();
         String prefix = "";
@@ -43,11 +45,31 @@ public class AdminStudentController {
 
     @PutMapping("")
     public Student updateStudent(@RequestBody Student student){
-        return studentService.updateStudent(student);
+        if(student.getCollage().getId()!= null){
+            return studentService.updateStudent(student);
+        }
+        else{
+            Long collegeid = 1L;
+            student.getCollage().setId(collegeid);
+            return studentService.updateStudent(student);
+        }
     }
 
     @GetMapping("")
-    public List<StudentDTO> findAll(){
-        return studentService.getAllStudents();
+    public List<StudentDTO> findAll(HttpSession session){
+        Student student = (Student) session.getAttribute("sessionid");
+        List<StudentDTO> studentDTOS = new ArrayList<>();
+        if(student == null) return studentDTOS;
+        else{
+            if(student.getRole().getId()==1L){
+                return studentDTOS;
+            }
+            if(student.getRole().getId()==2L){
+                return studentDTOS;
+            }
+            else{
+                return studentService.getAllStudents();
+            }
+        }
     }
 }

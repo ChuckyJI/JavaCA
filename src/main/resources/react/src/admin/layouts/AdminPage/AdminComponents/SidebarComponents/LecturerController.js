@@ -156,7 +156,7 @@ export const LecturerController = () => {
       setStudents([...students, response.data]);
       setStudent({});
       showNotice(
-        "Great! You have added this student to the list successfully!"
+        "Great! You have added this lecturer to the list successfully!"
       );
       console.log(student.id);
     } catch (error) {
@@ -175,6 +175,7 @@ export const LecturerController = () => {
   };
 
   const updateStudent = async (updatedStudent) => {
+    closeModal();
     try {
       console.log(updatedStudent.id);
       updatedStudent.role = { id: 2 };
@@ -196,7 +197,7 @@ export const LecturerController = () => {
     try {
       await axios.delete(`/admin/lecturer/${id}`);
       setStudents(students.filter((student) => student.id !== id));
-      showNotice("You have deleted this student successfully!");
+      showNotice("You have deleted this lecturer successfully!");
     } catch (error) {
       console.error(error);
     }
@@ -216,7 +217,7 @@ export const LecturerController = () => {
         className="btn btn-secondary mb-3"
         onClick={openModal}
       >
-        {modalTitle}
+        Add Lecturer
       </button>
       {showMessage && <p>{showMessage}</p>}
 
@@ -226,7 +227,7 @@ export const LecturerController = () => {
         contentLabel="Add Lecturer"
         className="modal-dialog modal-lg"
       >
-        <h2>{modalTitle}</h2>
+        {student.id ? <h2>Edit Lecturer</h2>:<h2>Add Lecturer</h2>}
         {showMessage && <p>{showMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group mt-2">
@@ -310,10 +311,10 @@ export const LecturerController = () => {
                 <td>{student.email}</td>
                 <td>{student.college_name}</td>
                 <td>
-                  <button onClick={() => editStudent(student)}>Edit</button>
+                  <button onClick={() => editStudent(student)}className="btn btn-outline-primary">Edit</button>
                 </td>
                 <td>
-                  <button onClick={() => deleteConfirmation(student.id)}>
+                  <button onClick={() => deleteConfirmation(student.id)}className="btn btn-outline-danger">
                     Delete
                   </button>
                 </td>

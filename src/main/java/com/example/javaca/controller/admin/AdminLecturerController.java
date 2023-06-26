@@ -1,14 +1,17 @@
 package com.example.javaca.controller.admin;
 // This is designed by SA56 Team2
 
+import com.example.javaca.dto.CourseDTO;
 import com.example.javaca.dto.LecturerDTO;
 import com.example.javaca.pojo.Student;
 import com.example.javaca.service.Impl.adminService;
 import com.example.javaca.service.Impl.lecturerService;
 import com.example.javaca.service.Impl.studentService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,12 +44,32 @@ public class AdminLecturerController {
 
     @PutMapping("")
     public Student updateLecturer(@RequestBody Student lecturer){
-        return lecturerService.updateLecturer(lecturer);
+        if(lecturer.getCollage().getId()!= null){
+            return lecturerService.updateLecturer(lecturer);
+        }
+        else{
+            Long collegeid = 1L;
+            lecturer.getCollage().setId(collegeid);
+            return lecturerService.updateLecturer(lecturer);
+        }
     }
 
     @GetMapping("")
-    public List<LecturerDTO> findAll(){
-        return lecturerService.getAllLecturers();
+    public List<LecturerDTO> findAll(HttpSession session){
+        Student student = (Student) session.getAttribute("sessionid");
+        List<LecturerDTO> lecturerDTOS = new ArrayList<>();
+        if(student == null) return lecturerDTOS;
+        else{
+            if(student.getRole().getId()==1L){
+                return lecturerDTOS;
+            }
+            if(student.getRole().getId()==2L){
+                return lecturerDTOS;
+            }
+            else{
+                return lecturerService.getAllLecturers();
+            }
+        }
     }
 
 

@@ -14,8 +14,11 @@ import com.example.javaca.service.Impl.courseService;
 import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -44,12 +47,32 @@ public class AdminCourseController {
 
     @PutMapping("")
     public Course updateModule(@RequestBody Course course){
-        return courseService.updateCourse(course);
+        if(course.getCollage().getId()!= null){
+            return courseService.updateCourse(course);
+        }
+        else{
+            Long collegeid = 1L;
+            course.getCollage().setId(collegeid);
+            return courseService.updateCourse(course);
+        }
     }
 
     @GetMapping("")
-    public List<CourseDTO> findAll(){
-        return courseService.findAllCourse();
+    public List<CourseDTO> findAll(HttpSession session){
+        Student student = (Student) session.getAttribute("sessionid");
+        List<CourseDTO> courseDTOList = new ArrayList<>();
+        if(student == null) return courseDTOList;
+        else{
+            if(student.getRole().getId()==1L){
+                return courseDTOList;
+            }
+            if(student.getRole().getId()==2L){
+                return courseDTOList;
+            }
+            else{
+                return courseService.findAllCourse();
+            }
+        }
     }
 
     @PostMapping("/addlec")

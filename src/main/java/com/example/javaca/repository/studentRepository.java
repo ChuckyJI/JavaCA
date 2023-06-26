@@ -25,4 +25,11 @@ public interface studentRepository extends JpaRepository<Student,Long> {
     @Modifying
     @Query("delete from Enrollment e where e.student.ID = :studentid")
     int deleteEnrollmentbyStudentId(@Param("studentid") Long studentid);
+
+    @Query("select s from Student s where s.Name=:studentname")
+    Student getStudentsByName(@Param("studentname") String studentname);
+
+    @Modifying
+    @Query("delete from Student s where s.Name = :studentname")
+    int deleteStudentByName(@Param("studentname") String studentname);
 }

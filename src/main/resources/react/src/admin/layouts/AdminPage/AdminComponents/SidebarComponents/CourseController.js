@@ -72,7 +72,7 @@ export const CourseController = () => {
     try {
       newLecturer.courseId = course.id;
       const response = await axios.post("/admin/course//addlec", newLecturer);
-      // 执行成功后的操作
+      showNotice("Great! You have added the lecturer(s) successfully!");
     } catch (error) {
       console.error(error);
     }
@@ -119,6 +119,7 @@ export const CourseController = () => {
   };
 
   const updateCourse = async (updatedCourse) => {
+    closeModal();
     try {
       const response = await axios.put("/admin/course", updatedCourse);
       setCourses((prevCourses) =>
@@ -200,7 +201,7 @@ export const CourseController = () => {
         className="btn btn-secondary mb-3"
         onClick={openModal}
       >
-        {modalTitle}
+        Add Course
       </button>
       {showMessage && <p>{showMessage}</p>}
 
@@ -232,7 +233,7 @@ export const CourseController = () => {
         contentLabel="Add Course"
         className="modal-dialog modal-lg"
       >
-        <h2>Add Course</h2>
+        {course.id ? <h2>Edit Course</h2>:<h2>Add Course</h2>}
         {showMessage && <p>{showMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group mt-2">
@@ -378,15 +379,15 @@ export const CourseController = () => {
                 <td>{course.date}</td>
                 <td>{course.compulsory ? "Yes" : "No"}</td>
                 <td>
-                  <button onClick={() => editLecturer(course)}>
+                  <button onClick={() => editLecturer(course)}className="btn btn-outline-primary">
                     AddLecturer
                   </button>
                 </td>
                 <td>
-                  <button onClick={() => editCourse(course)}>Edit</button>
+                  <button onClick={() => editCourse(course)}className="btn btn-outline-primary">Edit</button>
                 </td>
                 <td>
-                  <button onClick={() => deleteConfirmation(course.id)}>
+                  <button onClick={() => deleteConfirmation(course.id)}className="btn btn-outline-danger">
                     Delete
                   </button>
                 </td>

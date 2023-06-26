@@ -32,4 +32,11 @@ public interface courseRepository extends JpaRepository<Course,Long> {
     @Query("select c from Course c where c.id=:id")
     Course findCoursebyId(@Param("id") Long id);
 
+    @Query("select c from Course c where c.cousename = :coursename")
+    Course fineCoursebyName(@Param("coursename") String coursename);
+
+
+    @Modifying
+    @Query("delete from Course c where c.cousename = :coursename")
+    int deleteCourseByName(@Param("coursename") String coursename);
 }
