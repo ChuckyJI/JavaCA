@@ -9,19 +9,19 @@ Part | Language | Port
 ### 2. CAPS's Basic Logic
 
 #### 2.1 Database
-Database Name|                       Admin*                        | Lecturer | Student 
- :----: |:---------------------------------------------------:|:--------:|  :----:
-Student(Stu/Lec)|                       C/R/U/D                       |    -     |-
-Course|                       C/R/U/D                       |    -     |-
-Role*|                          R                          |    -     |-
-College*|                          R                          |    -     |-
-Enrollment|    D(only happpened when delete course/Student)     |   R/U    |C/R/U
-Grade|    D(only happpened when delete course/Student)     |  C/R/U   |R
-Lecturer_Course*(Generated automaticaly)| C/R/U/D(only happpened when delete course/Lecturer) |R|R
+Database Name|                       Admin*                       | Lecturer | Student 
+ :----: |:--------------------------------------------------:|:--------:|  :----:
+Student(Stu/Lec)|                      C/R/U/D                       |    -     |-
+Course|                      C/R/U/D                       |    -     |-
+Role*|                         R                          |    -     |-
+College*|                         R                          |    -     |-
+Enrollment|    D(only happened when delete course/Student)     |   R/U    |C/R/U
+Grade|    D(only happened when delete course/Student)     |  C/R/U   |R
+Lecturer_Course*(Generated automatically)| C/R/U/D(only happened when delete course/Lecturer) |R|R
 
-**Admin**: This admin actor is a user who can only arrange current resources in the university. If the university would like to add a new college or new role, this CAPS's admin does not have enough authorization to do that.
+**Admin**: This admin actor is a user who can only arrange current resources in the university. If the university would like to add a new college or new role, this CAPS admin does not have enough authorization to do that.
 
-**Role / College** : These two tables need inheritate from university super database. They can only read and assign value to students or lacturers.
+**Role / College** : These two tables need inheritance from university super database. They can only read and assign value to students or lecturers.
 
 **Lecturer_Course** : This table is generated automatically when we set many-to-many relationship between course and lecturer.
 
@@ -43,17 +43,17 @@ Lecturer|Admin(Without data)|-|Lecturer Main Page (View Course Taught)
 Student|Admin(Without data)| Student Main Page(View Enrolled Course)|-
 
 ### 3. HOW TO RUN
-1. Connect your MySQL database, then create your own database and remember the name
-2. Link to [application.properties](src/main/resources/application.properties) to modify your database name (Line 2)
-3. Run your [JavaCaApplication](src/main/java/com/example/javaca/JavaCaApplication.java)
-4. Open the [testDB.sql](testDB.sql), then insert the test data
+1. Connect your MySQL database, then create database javaca or your own database. Remember the name of the database you choose.
+2. Open the [application.properties](src/main/resources/application.properties) to modify database url (Line 2) and password (line 3) accordingly.
+3. Run the [JavaCaApplication](src/main/java/com/example/javaca/JavaCaApplication.java) program.
+4. Open [testDB.sql](testDB.sql) with your Database Tools(such as MySQLWorkbench, HeidiSQL etc.), if you used a different name for the database in step 1, please update database name in script. Execute the SQL script to insert the test data into the database.
 5. Make sure you have installed Node. if not, please visit [Nodejs.org](https://nodejs.org/en)
-6. Open your Terminal / Command, and open this folder by using "cd folder_name"
+6. Open your Terminal / Command, and open this folder by using "cd folder_name": "cd JavaCA" -> "cd src" -> "cd main" -> "cd resources" -> "cd react"
 7. Run "npm install" (**first run only**)
 8. Run "npm start" (No data, for no login any actors) and quit the browser
 9. Re-Run your [JavaCaApplication](src/main/java/com/example/javaca/JavaCaApplication.java) (not necessary)
 10. Type [http://localhost:8080](http://localhost:8080/)
-11. Enjor your test!
+11. Enjoy your test!
 
 ### 4.Test Account
 For Student: 
