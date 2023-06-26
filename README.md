@@ -54,3 +54,23 @@ Student|Admin(Without data)| Student Main Page(View Enrolled Course)|-
 9. Re-Run your [JavaCaApplication](src/main/java/com/example/javaca/JavaCaApplication.java) (not necessary)
 10. Type [http://localhost:8080](http://localhost:8080/)
 11. Enjor your test!
+
+### 4.Test Account
+For Student: 
+>Email : **javaCAstudent@gmail.com**
+>
+> Password: javaca
+>
+> >In order to test the Email-Service:  
+> >Email Address: **javaCAstudent@gmail.com**  
+> >Email Password:cba321#@!
+
+For Lecturer:
+>Email : **test1@lec.nus.edu**
+> 
+> Password:test1
+
+For Admin:
+>Email : **test@admin.nus.edu**
+> 
+> Password:test
