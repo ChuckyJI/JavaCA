@@ -36,11 +36,11 @@ Testing times |         <40 Mark          | <40 GPA |     ≥40 Mark     | ≥40
 ![SAMPLE](src/main/resources/static/readme-1.png)
 
 #### 2.3 Visiting across roles (for typing link manually only)
-~ |Admin|Lecturer|Student
-:----:|:----:|:----:|:----:
-Admin| - |Current Page|Current Page
-Lecturer|Admin(Without data)|-|Lecturer Main Page (View Course Taught)
-Student|Admin(Without data)| Student Main Page(View Enrolled Course)|-
+~ |Admin|                Lecturer                 |Student
+:----:|:----:|:---------------------------------------:|:----:
+Admin| - |           Admin Current Page            |Admin Current Page
+Lecturer|Admin(Without data)|                    -                    |Lecturer Main Page (View Course Taught)
+Student|Admin(Without data)| Student Main Page(View Enrolled Course) |-
 
 ### 3. HOW TO RUN
 

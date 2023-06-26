@@ -2,6 +2,12 @@
 If you want to enjoy more,suggest to visit README.md.
 
 HOW TO RUN
+I, PRE-REQUISITE
+1. Java Development Kit (JDK) JKD installment
+2. Node. if not, please visit Nodejs.org
+3. MySQL Database Server MySQL Community Server Download
+
+II, HOW TO RUN
 1. Connect your MySQL database, then create database javaca or your own database. Remember the name of the database you choose.
 2. Open the application.properties to modify database url (Line 2) and password (line 3) accordingly.
 3. Run the JavaCaApplication program.
